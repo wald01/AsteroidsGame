@@ -2,6 +2,7 @@
 Spaceship bob = new Spaceship();
 Star[] stars = new Star[50];
 int acc = 0;
+char lastKey = ' ';
 public void setup() 
 {
   size(400, 400);
@@ -24,37 +25,45 @@ public void draw()
     stars[i].show((int)(Math.random()*390)+10, (int)(Math.random()*390)+10);
     if (key == 'x' || key == 'R')
     bob.accelerate(0.2);
-  //if(keyPressed){   //without this it keeps on moving when key pressed once and released
+  if(keyPressed){   //without this it keeps on moving when key pressed once and released
     if (key == 'd' || key == 'D') {
     bob.setXspeed(0.5);
     bob.setYspeed(0);
-    //bob.accelerate(0.2);
-    //bob.turn(1); //pointdirection? if its pointing towards up its stops turning
     bob.move();
+    lastKey = 'd';
+    bob.accelerate(0.2);
+    //bob.turn(1); //pointdirection? if its pointing towards up its stops turning
   } else if (key == 'w' || key == 'W') {
-    //bob.setXspeed(0);
-   // bob.setYspeed(-0.5);
+    bob.setXspeed(0);
+    bob.setYspeed(-0.5);
     //bob.turn(-1);
     bob.move();
-    bob.accelerate(0.01);
+    lastKey = 'w';
   } else if (key == 's' || key == 'S') {
     bob.setXspeed(0);
-    bob.setYspeed(0.01);
+    bob.setYspeed(0.5);
     //bob.turn(1);
     bob.move();
+    lastKey = 's';
   } else if (key == 'a' || key == 'A') {
-    bob.setXspeed(-0.01);
+    bob.setXspeed(-0.5);
     bob.setYspeed(0);
     //bob.turn(1);
     bob.move();
+    lastKey = 'a';
   } else if (key == 'z' || key == 'Z') {
     bob.hyperSpace();
   } else if (key == 'e' || key == 'E') {
     bob.turn(1);
   } else if (key == 'q' || key == 'Q') {
     bob.turn(-1);
+  } else if (key == 'f' || key == 'F'){
+    switch(lastKey){
+    case 'd':
+    
+    }
   }
-  //}
+  }
 
 
 }
