@@ -58,12 +58,10 @@ public void draw()
   } else if (key == 'q' || key == 'Q') {
     bob.turn(-1);
   } else if (key == 'f' || key == 'F'){
-    switch(lastKey){
-    case 'd':
-    
+    bob.move();
+    bob.accelerate(0.2);
     }
   }
   }
 
 
-}
