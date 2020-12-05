@@ -13,8 +13,8 @@ class Spaceship extends Floater
     xCorners[3] = -2;
     yCorners[3] = 0;
     myColor = 255;   //white spaceship
-    myCenterX = 200;
-    myCenterY = 200; //holds center coordinates   
+    myCenterX = 250;
+    myCenterY = 250; //holds center coordinates   
     myXspeed = 0;
     myYspeed = 0; //holds the speed of travel in the x and y directions   
     myPointDirection = 0; //holds current direction the ship is pointing in degrees    
@@ -34,5 +34,11 @@ class Spaceship extends Floater
     public void hyperSpace(){
       myCenterX = Math.random()*401;
       myCenterY = Math.random()*401;
+    }
+    public double getCenterX(){
+      return myCenterX;
+    }
+    public double getCenterY(){
+      return myCenterY;
     }
 }
