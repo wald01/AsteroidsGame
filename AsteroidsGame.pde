@@ -8,6 +8,7 @@
 Spaceship bob = new Spaceship();
 Star[] stars = new Star[50];
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+ArrayList<Bullet> shots = new ArrayList<Bullet>();
 int acc = 0;
 //char lastKey = ' ';
 public void setup() 
@@ -50,8 +51,39 @@ public void draw()
       asteroids.remove(i);
     }
   }
-  if (key == 'x' || key == 'R')
-    bob.accelerate(0.2);
+  if(asteroids.size() <= 10){
+    for(int i = 0; i < 5; i++){
+      asteroids.add(new Asteroid());
+     for(int y = 0; y < asteroids.size(); y++){
+     if((int)(Math.random()*4)+1 == 1)
+      asteroids.get(i).setSpeed((Math.random()*0.30), (Math.random()*0.30)); //math.random -0.33 to 0.3
+     else if((int)(Math.random()*4)+1 == 2)
+       asteroids.get(i).setSpeed((Math.random()*-0.30), (Math.random()*-0.30));
+     else if((int)(Math.random()*4)+1 == 3)
+       asteroids.get(i).setSpeed((Math.random()*-0.30), (Math.random()*0.30));
+     else
+       asteroids.get(i).setSpeed((Math.random()*0.30), (Math.random()*-0.30));
+     }
+    }  
+  }
+  for(int i = 0; i < shots.size(); i++){
+    shots.get(i).move();
+    shots.get(i).show();
+    for(int j = 0; j < asteroids.size(); j++){
+      if(dist((float)shots.get(i).getCenterX(), (float)shots.get(i).getCenterY(), (float)asteroids.get(j).getCenterX(), (float)asteroids.get(j).getCenterY()) < 10){
+      shots.remove(i);
+      asteroids.remove(j);
+      }
+    }
+//    if(shots.get(i).getCenterX() > 400)
+//      shots.remove(i);
+//    else if(shots.get(i).getCenterX() < 0)
+//      shots.remove(i);
+//    else if(shots.get(i).getCenterY() > 400)
+//     shots.remove(i);
+//    else if(shots.get(i).getCenterY() < 0)
+//      shots.remove(i);
+    }
   if(keyPressed){   //without this it keeps on moving when key pressed once and released
     if (key == 'd' || key == 'D') {
     bob.setXspeed(0.5);
@@ -87,6 +119,11 @@ public void draw()
   } else if (key == 'f' || key == 'F'){
     bob.move();
     bob.accelerate(0.2);
-    }
+  } else if(key == ' '){
+    shots.add(new Bullet(bob));
+    //if(shots.size() > 200){
+    //  shots.remove(0);
+    
+  }
   }
   }
